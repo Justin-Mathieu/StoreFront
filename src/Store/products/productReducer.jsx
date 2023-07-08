@@ -32,14 +32,6 @@ default:
 
 }
 
-export const  set = (category) => {
-    console.log('================>', category)
-    return {
-        type: 'SET',
-        payload: category,
-    }
-}
-
 
 export default productReducer;
 

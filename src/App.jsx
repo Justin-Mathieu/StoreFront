@@ -3,6 +3,7 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import Categories from './Components/Categories'
 import Products from './Components/Products'
+import Cart from './Components/SimpleCart'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     <Header/>
     <Categories/>
     <Products/>
+    <Cart/>
     <Footer/>
     </>
   )
