@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import { add } from '../../Store/actions';
 
 function Products(){
     const { activeCategory, products } = useSelector((state)=>state.store)
@@ -33,7 +34,7 @@ function Products(){
                             
                         </CardContent>
                         <CardActions>
-                            <Button>ADD TO CART</Button>
+                            <Button onClick={()=>{add(product)}}>ADD TO CART</Button>
                             <Button>VIEW DETAILS</Button>
                         </CardActions>
                     </Card> 
