@@ -2,8 +2,9 @@
 
 function Header(){
     return(
+        
         <h1>
-            Store Front Store
+            Our Store
         </h1>
     )
 }

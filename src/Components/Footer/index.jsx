@@ -1,10 +1,9 @@
 
-
 function Footer(){
     return(
-        <p>
-           &CodeFellows
-        </p>
+      
+            <footer>&copy;2023 Code Fellows</footer>
+        
     )
 }
 

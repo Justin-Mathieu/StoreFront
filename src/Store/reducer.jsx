@@ -12,43 +12,34 @@ let initialState = { categories: [
     { name: 'Eggs', category: 'food', price: 1.99, inStock: 12 },
     { name: 'Bread', category: 'food', price: 2.39, inStock: 90 },
   ],
-  activeCategory: {}
+  activeCategory: ''
 };
 
 
 function productReducer(state=initialState, action){
 switch(action.type){
 
-    case'electronics':
+    case 'SET':
     return {
-   activeCategory: action.payload.name,
-   products: state.products.filter(item => item.category === action.payload.name)
+        ...state,
+   activeCategory: action.payload,
+   products: initialState.products.filter(item => item.category === action.payload.name)
    }
-case 'food':
-    return {
-        activeCategory: action.payload.name,
-        products: state.products.filter(item => item.category === action.payload.name)
-        }
+
 default:
     return state;
 }
 
 }
 
-export const  foodCategory = (category) => {
-    console.log(category)
+export const  set = (category) => {
+    console.log('================>', category)
     return {
-        type: 'food',
-        Payload: category,
-    }
-}
-
-export const electronicsCategory = (category)=>{
-    return{
-        type:'electronics',
+        type: 'SET',
         payload: category,
     }
 }
-  
+
+
 export default productReducer;
 
