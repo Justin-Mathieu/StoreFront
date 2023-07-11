@@ -7,17 +7,31 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { addCart } from '../Cart/cart';
+import { addProduct } from '../../Store/cart';
+import { removeInventory } from '../../Store/products';
+import { useEffect } from 'react';
+import { getProducts} from '../../Store/products';
 
 function Products(){
-    const { products } = useSelector((state)=>state.products)
+    const { products } = useSelector((state)=>state)
     const { activeCategory } = useSelector((state)=> state.categories)
     const dispatch = useDispatch();
+
+const handleAdd = (product) => {
+    console.log(product)
+    dispatch(addProduct(product));
+    dispatch(removeInventory(product))
+}
+
+useEffect(()=>{
+    dispatch(getProducts(activeCategory.name))
+}, [activeCategory])
+
     return(
         <>
         <When condition={activeCategory}>
-            <h2>{activeCategory.displayName}</h2>
-            <p>!===CATEGORY DESCRIPTION===!</p>
+            <h2>{activeCategory.name}</h2>
+            <p>{activeCategory.description}</p>
 
             <Grid container spacing={1}>
             {
@@ -36,7 +50,7 @@ function Products(){
                             
                         </CardContent>
                         <CardActions>
-                            <Button onClick={()=>dispatch(addCart(product))}>ADD TO CART</Button>
+                            <Button onClick={()=>handleAdd(product)}>ADD TO CART</Button>
                             <Button>VIEW DETAILS</Button>
                         </CardActions>
                     </Card> 

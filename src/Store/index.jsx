@@ -3,8 +3,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // Reducers
 import productReducer from './products';
-import categoryReducer from './categories/index.jsx';
-import cartReducer from '../Components/Cart/cart';
+import categoryReducer from './categories';
+import cartReducer from './cart';
 
 
 const store = () => configureStore({

@@ -1,37 +1,39 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
-import { SET_PRODUCTS, GET_PRODUCTS, SET_ACTIVE } from '../constant'
+import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-let initialState = {
-  products: [],
-};
-  
-export const setProducts = createAction(SET_PRODUCTS);
+// Create reducer and action in one
+const productSlice = createSlice({
+  name: 'products',
+  initialState: [],
+  reducers:{
+    setProducts: (state, action)=> action.payload,
+  }
 
+});
 
-const productReducer = createReducer(
-  initialState,
-  {
-    [SET_PRODUCTS]: (state, action)=>{
-      return {
-        ...state,
-        products: action.payload
-        }
-      },
-      [SET_ACTIVE]: (state, action)=>{
-        return{
-          ...state,
-          products: state.products.filter(item => item.category === action.payload.name)
-        }
-      }
-      
-    }
-  
-)
-export const getData = ()=> async(dispatch, getState)=>{
-  let response = await axios.get('https://api-js401.herokuapp.com/api/v1/products');
+// Get products with active category as option
+export const getProducts = (activeCategory) => async (dispatch)=>{
+  console.log(activeCategory);
+  let response = await axios.get(`https://api-js401.herokuapp.com/api/v1/products?category=${activeCategory}`);
   dispatch(setProducts(response.data.results));
 }
 
-export default productReducer;
+// Decrement inventory on Add to cart
+export const removeInventory = (product) => async (dispatch)=>{
+  console.log('===============>>>>>>>>>HERE<<<<<<<<<<<<<<=================')
+  product = {...product, inStock: product.inStock -1}
+   await axios.put(`https://api-js401.herokuapp.com/api/v1/products/${product._id}`,  product)
+  dispatch(getProducts(product.category));
+}
+
+// Increment inventory on removing from cart
+export const addInventory = (product) => async (dispatch) =>{
+  product = {...product, inStock: product.inStock +1}
+  await axios.put(`https://api-js401.herokuapp.com/api/v1/products/${product._id}`, product)
+dispatch(getProducts(product.category))
+}
+
+// Export actions and erducer
+export const {setProducts} = productSlice.actions
+export default productSlice.reducer;
 

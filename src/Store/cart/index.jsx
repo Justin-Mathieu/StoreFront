@@ -1,36 +1,15 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
-import { ADD_CART, REMOVE_CART } from '../../../Store/constant'
+import { createSlice } from "@reduxjs/toolkit";
 
+// Create slice and actions
+const cartSlice = createSlice({
+    name: 'cart',
+    initialState: [],
+    reducers:{
+        addProduct: (state, action) => [...state, action.payload],
+        removeProduct: (state, action)=> state.filter((product)=> product.name !== action.payload.name)
+    }   
+})
 
-let initialState = {
-    cart: [],
-};
-
-
-export const addCart = createAction(ADD_CART);
-export const removeCart = createAction(REMOVE_CART);
-
- const cartReducer = createReducer(
-    initialState,
-    {
-        [ADD_CART]: (state, action)=>{
-            return{
-                ...state,
-                cart: [...state, {name: action.payload.name, price: action.payload.price}]
-            }
-        },
-
-        [REMOVE_CART]: (state, action)=>{
-            return{
-                ...state,
-                cart: state.cart.filter((product)=>product.name !== action.payload.name)
-            }
-        }
-    }
-
-)
-
-
-
-
-export default cartReducer;
+// Export reducer and actions
+export const {addProduct, removeProduct} = cartSlice.actions;
+export default cartSlice.reducer;

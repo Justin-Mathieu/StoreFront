@@ -1,20 +1,21 @@
 import {useDispatch, useSelector} from 'react-redux';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
-import { getCategories, setActive} from '../../Store/categories';
-import { getProducts } from '../../Store/products';
+import { getCategories, setActiveCategory} from '../../Store/categories';
 
 
 function Categories(){
 
-  useEffect(()=>{
-    dispatch(getCategories());
-    dispatch(getProducts());
-  }, []);
-
 const dispatch = useDispatch();
 const { categories } = useSelector((state)=> state.categories)
-console.log('==============>>>>>', categories);
+
+  useEffect(()=>{
+    dispatch(getCategories());
+  }, []);
+
+const handleSet = (category)=>{
+  dispatch(setActiveCategory(category))
+}
     return (
     <>
       <h2>
@@ -22,7 +23,7 @@ console.log('==============>>>>>', categories);
     </h2>
     {
       categories.map((category, index)=>(
-     <Button key={`category${index}`} color='primary' onClick={()=>{dispatch(setActive(category))}}>{category.name}</Button>   
+     <Button key={`category${index}`} color='primary' onClick={()=> handleSet(category)}>{category.name}</Button>   
       ))
     }
     

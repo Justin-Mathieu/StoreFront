@@ -1,11 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
 import { When } from "react-if";
-import { removeCart } from "..";
+import { removeProduct } from "../../Store/cart";
 import { List, ListItem, Button } from "@mui/material";
+import { addInventory } from "../../Store/products";
 
 function Cart(){
-    const { cart} = useSelector((state)=> state.cart)
+    const { cart} = useSelector((state)=> state)
     const dispatch = useDispatch();
+
+    const handleRemove = (product)=>{
+        dispatch(removeProduct(product));
+        dispatch(addInventory(product))
+    }
     return(
         <>
         <When condition={cart.length >= 0}>
@@ -13,7 +19,7 @@ function Cart(){
                 <List>
                     {
                     cart.map((product, index)=>(
-                        <ListItem key={`cart-${index}`}>{product.name} <Button onClick={()=>dispatch(removeCart(product))}>Remove Item</Button></ListItem>
+                        <ListItem key={`cart-${index}`}>{product.name} <Button onClick={()=> handleRemove(product)}>Remove Item</Button></ListItem>
                     ))
                     }
                     
