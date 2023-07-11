@@ -7,10 +7,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { add } from '../../Store/actions';
+import { addCart } from '../Cart/cart';
 
 function Products(){
-    const { products } = useSelector((state)=>state.store)
+    const { products } = useSelector((state)=>state.products)
     const { activeCategory } = useSelector((state)=> state.categories)
     const dispatch = useDispatch();
     return(
@@ -36,7 +36,7 @@ function Products(){
                             
                         </CardContent>
                         <CardActions>
-                            <Button onClick={()=>dispatch(add(product))}>ADD TO CART</Button>
+                            <Button onClick={()=>dispatch(addCart(product))}>ADD TO CART</Button>
                             <Button>VIEW DETAILS</Button>
                         </CardActions>
                     </Card> 
