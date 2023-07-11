@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { When } from "react-if";
-import { remove } from "../../Store/actions";
+import { removeCart } from "..";
 import { List, ListItem, Button } from "@mui/material";
 
 function Cart(){
@@ -13,7 +13,7 @@ function Cart(){
                 <List>
                     {
                     cart.map((product, index)=>(
-                        <ListItem key={`cart-${index}`}>{product.name} <Button onClick={()=>dispatch(remove(product))}>Remove Item</Button></ListItem>
+                        <ListItem key={`cart-${index}`}>{product.name} <Button onClick={()=>dispatch(removeCart(product))}>Remove Item</Button></ListItem>
                     ))
                     }
                     
