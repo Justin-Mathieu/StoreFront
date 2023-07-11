@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 function Categories(){
 
 const dispatch = useDispatch();
-const { categories } = useSelector((state)=> state.store)
+const { categories } = useSelector((state)=> state.categories)
 console.log(categories);
     return (
     <>

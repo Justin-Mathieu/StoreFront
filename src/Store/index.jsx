@@ -4,12 +4,14 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk';
 
 // MY STUFF
-import productReducer from './products/productReducer';
-import cartReducer from './cart/cartReducer';
+import productReducer from './products';
+import cartReducer from './cart';
+import categoryReducer from './categories/index.jsx';
 
 const reducers = combineReducers({
     store: productReducer,
     cart: cartReducer,
+    categories: categoryReducer,
 });
 
 
