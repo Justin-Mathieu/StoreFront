@@ -1,4 +1,5 @@
-
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function Header(){
     return(
@@ -8,7 +9,7 @@ function Header(){
             Our Store
 
              <div>
-            Cart
+            <Button component={Link} to={'/ShoppingCart'}></Button>
          </div>
         </h1>
         

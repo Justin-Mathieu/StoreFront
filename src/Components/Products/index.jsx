@@ -11,6 +11,7 @@ import { addProduct } from '../../Store/cart';
 import { removeInventory } from '../../Store/products';
 import { useEffect } from 'react';
 import { getProducts} from '../../Store/products';
+import {Link} from 'react-router-dom';
 
 function Products(){
     const { products } = useSelector((state)=>state)
@@ -51,7 +52,7 @@ useEffect(()=>{
                         </CardContent>
                         <CardActions>
                             <Button onClick={()=>handleAdd(product)}>ADD TO CART</Button>
-                            <Button>VIEW DETAILS</Button>
+                            <Button component={Link} to={`/product/${product._id}`}>VIEW DETAILS</Button>
                         </CardActions>
                     </Card> 
                     </Grid>
